@@ -78,7 +78,7 @@ export default class WeatherWidget extends Component {
   _handleSubmit(event) {
     if (!this.state.input) {
       event.preventDefault();
-      window.location.href = "http://localhost:3000/";
+      window.location.href = "https://victorzw895.github.io/weather-widget/";
     }
   }
 
