@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/weather-widget/static/css/main.84ffb0a8.chunk.css",
+    "main.js": "/weather-widget/static/js/main.8bd16661.chunk.js",
+    "main.js.map": "/weather-widget/static/js/main.8bd16661.chunk.js.map",
+    "runtime-main.js": "/weather-widget/static/js/runtime-main.deeb0f0f.js",
+    "runtime-main.js.map": "/weather-widget/static/js/runtime-main.deeb0f0f.js.map",
+    "static/css/2.99b305ab.chunk.css": "/weather-widget/static/css/2.99b305ab.chunk.css",
+    "static/js/2.fdd45080.chunk.js": "/weather-widget/static/js/2.fdd45080.chunk.js",
+    "static/js/2.fdd45080.chunk.js.map": "/weather-widget/static/js/2.fdd45080.chunk.js.map",
+    "index.html": "/weather-widget/index.html",
+    "precache-manifest.d275551261c8ae841be994cd8ff57d01.js": "/weather-widget/precache-manifest.d275551261c8ae841be994cd8ff57d01.js",
+    "service-worker.js": "/weather-widget/service-worker.js",
+    "static/css/2.99b305ab.chunk.css.map": "/weather-widget/static/css/2.99b305ab.chunk.css.map",
+    "static/css/main.84ffb0a8.chunk.css.map": "/weather-widget/static/css/main.84ffb0a8.chunk.css.map",
+    "static/media/semantic.min.css": "/weather-widget/static/media/outline-icons.ef60a4f6.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.deeb0f0f.js",
+    "static/css/2.99b305ab.chunk.css",
+    "static/js/2.fdd45080.chunk.js",
+    "static/css/main.84ffb0a8.chunk.css",
+    "static/js/main.8bd16661.chunk.js"
+  ]
+}
