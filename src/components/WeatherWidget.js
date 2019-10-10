@@ -1,24 +1,15 @@
 import React, { Component } from "react";
 import fetchWeather from "../utils/Api";
+import { Segment, Input } from "semantic-ui-react";
 
-export default class WeekContainer extends Component {
-  constructor(props) {
-    super(props);
+export default class WeatherWidget extends Component {
+  constructor() {
+    super();
     this.state = {
-      id: 2147714,
+      id: null,
       city: "Sydney",
-      clouds: "",
-      humidity: 0,
-      pressure: 0,
-      temp: 0,
-      maxTemp: 0,
-      minTemp: 0,
-      description: "",
-      icon: "",
-      mainWeather: "",
-      deg: 0,
-      gust: 0,
-      speed: 0
+      input: "",
+      loaded: false
     };
     this._handleChange = this._handleChange.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -27,7 +18,7 @@ export default class WeekContainer extends Component {
   getParams(location) {
     const searchParams = new URLSearchParams(location);
     return {
-      city: searchParams.get("city") || ""
+      city: searchParams.get("city")
     };
   }
 
@@ -38,28 +29,14 @@ export default class WeekContainer extends Component {
     fetchWeather(params.city || city) // if url query, fetch that, else from react state
       .then(response => {
         if (response.cod === 200) {
-          const main = response.main;
-          const weather = response.weather;
-          const wind = response.wind;
           console.log(response);
           this.renderWidget(response.id);
           this.setState({
             id: response.id,
-            city: response.name,
-            clouds: response.clouds.all,
-            humidity: main.humidity,
-            pressure: main.pressure,
-            temp: main.temp,
-            maxTemp: main.temp_max,
-            minTemp: main.temp_min,
-            description: weather.description,
-            icon: weather.icon,
-            mainWeather: weather.main,
-            deg: wind.deg,
-            gust: wind.gust,
-            speed: wind.speed
+            loaded: true
           });
         } else {
+          this.setState({ city: params.city, loaded: true });
           throw new Error(
             `${response.cod} - ${response.message}: ${params.city}`
           );
@@ -69,6 +46,8 @@ export default class WeekContainer extends Component {
   }
 
   renderWidget(id) {
+    const _APIKEY = process.env.REACT_APP_OPEN_WEATHER_MAP;
+
     if (window.myWidgetParam) {
       console.log(window.myWidgetParam);
     } else {
@@ -77,7 +56,7 @@ export default class WeekContainer extends Component {
     window.myWidgetParam.push({
       id: 15,
       cityid: id,
-      appid: "fdf1d48f3f3951dcb129a7e4be3b7d89",
+      appid: _APIKEY,
       units: "metric",
       containerid: "openweathermap-widget-15"
     });
@@ -93,35 +72,51 @@ export default class WeekContainer extends Component {
   }
 
   _handleChange(event) {
-    console.log(event.target.value);
-    // this.setState({ city: event.target.value });
+    this.setState({ input: event.target.value });
   }
 
   _handleSubmit(event) {
-    console.log(event);
-    // event.preventDefault();
-
-    // event.preventDefault();
-    // this.setState({ city: })
-    // fetchWeather(this.state.city);
+    if (!this.state.input) {
+      event.preventDefault();
+      window.location.href = "http://localhost:3000/";
+    }
   }
 
   render() {
+    let widget;
+    if (this.state.id && this.state.loaded) {
+      widget = <div id="openweathermap-widget-15"></div>;
+    } else if (!this.state.id && this.state.loaded) {
+      widget = <h2>Can't find weather for {this.state.city}</h2>;
+    } else {
+      widget = <h2>Loading...</h2>;
+    }
     return (
-      <div>
-        <h1>Weather Widget</h1>
-        <form onSubmit={this._handleSubmit}>
-          <label>Search City: </label>
-          <input
-            type="text"
-            name="city"
-            autoFocus
-            onChange={this._handleChange}
-          ></input>
-          <button>Search</button>
-        </form>
-        <div id="openweathermap-widget-15"></div>
-      </div>
+      <Segment
+        textAlign="center"
+        style={{
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <div>
+          <h1>Weather Widget</h1>
+          <form onSubmit={this._handleSubmit}>
+            <Input
+              focus
+              placeholder="Search City..."
+              action={{ content: "Search", color: "blue" }}
+              color="blue"
+              type="text"
+              name="city"
+              onChange={this._handleChange}
+            ></Input>
+          </form>
+          {widget}
+        </div>
+      </Segment>
     );
   }
 }

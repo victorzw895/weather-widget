@@ -1,4 +1,6 @@
-const _APIKEY = "fdf1d48f3f3951dcb129a7e4be3b7d89";
+const _APIKEY = process.env.REACT_APP_OPEN_WEATHER_MAP;
+
+// const _APIKEY = "fdf1d48f3f3951dcb129a7e4be3b7d89";
 let apiUrl = "http://api.openweathermap.org/data/2.5";
 
 const fetchWeather = city => {
