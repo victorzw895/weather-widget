@@ -1,5 +1,7 @@
 # Weather Widget
 
+![Weather-Widget](./public/weatherWidget.jpg "Weather Widget")
+
 # About
 
 [Demo](https://victorzw895.github.io/weather-widget/)
