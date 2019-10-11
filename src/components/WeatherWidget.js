@@ -98,7 +98,8 @@ export default class WeatherWidget extends Component {
           height: "100vh",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
+          backgroundColor: "dodgerblue"
         }}
       >
         <div>
